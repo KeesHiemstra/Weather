@@ -12,26 +12,35 @@ namespace ConsoleApp1
 	/// </summary>
 	/// 
 	#region WeatherData
+	/// <summary>
+	/// Coordinates of the station.
+	/// </summary>
 	[DataContract]
 	public class Coord
 	{
 		[DataMember(Name = "lon")]
-		public int Lon { get; set; }
+		public float Lon { get; set; }
 
 		[DataMember(Name = "lat")]
-		public double Lat { get; set; }
+		public float Lat { get; set; }
 	}
 
 
 	[DataContract]
-	public class WeatherI
+	public class Condition
 	{
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
 
+		/// <summary>
+		/// Weather condition in Enlish
+		/// </summary>
 		[DataMember(Name = "main")]
 		public string Main { get; set; }
 
+		/// <summary>
+		/// Weather condition in Dutch
+		/// </summary>
 		[DataMember(Name = "description")]
 		public string Description { get; set; }
 
@@ -44,47 +53,58 @@ namespace ConsoleApp1
 	public class Main
 	{
 		/// <summary>
-		/// Current temperature (K)
+		/// Current temperature [K], direct converted to [°C].
 		/// </summary>
+		private float temperature;
 		[DataMember(Name = "temp")]
-		public double Temperature { get; set; }
-
-		/// <summary>
-		/// Calculate temperature Kalvin to Celcius in 1 decimal
-		/// </summary>
-		public double TemperatureCelsius
+		public float Temperature
 		{
-			get { return Temperature.KelvinToCelsius(); }
+			get => temperature - 273.15f;
+			set => temperature = value;
 		}
 
 		/// <summary>
-		/// Display temperature in Celsius include trail
+		/// Pressure [mBar]
 		/// </summary>
-		public string TemperatureCelsiusString
-		{
-			get { return $"{Temperature.KelvinToCelsiusString()}"; }
-		}
-
 		[DataMember(Name = "pressure")]
 		public int Pressure { get; set; }
 
+		/// <summary>
+		/// Humidity [%].
+		/// </summary>
 		[DataMember(Name = "humidity")]
 		public int Humidity { get; set; }
 
+		private float temperatureMinumum;
 		[DataMember(Name = "temp_min")]
-		public double Temp_min { get; set; }
+		public float TemperatureMinimum
+		{
+			get => temperatureMinumum - 273.15f;
+			set => temperatureMinumum = value;
+		}
 
+		private float temperatureMaximum;
 		[DataMember(Name = "temp_max")]
-		public double Temp_max { get; set; }
+		public float TemperatureMaximum
+		{
+			get => temperatureMaximum - 273.15f;
+			set => temperatureMaximum = value;
+		}
 	}
 
 
 	[DataContract]
 	public class Wind
 	{
+		/// <summary>
+		/// Wind speed [m/s]
+		/// </summary>
 		[DataMember(Name = "speed")]
-		public double Speed { get; set; }
+		public float Speed { get; set; }
 
+		/// <summary>
+		/// Wind direction [deg]
+		/// </summary>
 		[DataMember(Name = "deg")]
 		public int Deg { get; set; }
 	}
@@ -93,6 +113,9 @@ namespace ConsoleApp1
 	[DataContract]
 	public class Clouds
 	{
+		/// <summary>
+		/// Clouds coverage [%]
+		/// </summary>
 		[DataMember(Name = "all")]
 		public int All { get; set; }
 	}
@@ -108,14 +131,20 @@ namespace ConsoleApp1
 		public int Id { get; set; }
 
 		[DataMember(Name = "message")]
-		public double Message { get; set; }
+		public float Message { get; set; }
 
 		[DataMember(Name = "country")]
 		public string Country { get; set; }
 
+		/// <summary>
+		/// Sunrise [date/time]
+		/// </summary>
 		[DataMember(Name = "sunrise")]
 		public int Sunrise { get; set; }
 
+		/// <summary>
+		/// Sunset [date/time]
+		/// </summary>
 		[DataMember(Name = "sunset")]
 		public int Sunset { get; set; }
 	}
@@ -128,7 +157,7 @@ namespace ConsoleApp1
 		public Coord Coord { get; set; }
 
 		[DataMember(Name = "weather")]
-		public List<WeatherI> Weather { get; set; }
+		public List<Condition> Conditions { get; set; }
 
 		[DataMember(Name = "@base")]
 		public string Base { get; set; }
@@ -161,4 +190,32 @@ namespace ConsoleApp1
 		public int Cod { get; set; }
 	}
 	#endregion
+
+	class Conversion
+	{
+		#region Time conversion
+		static System.DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+
+		/// <summary>
+		/// Convert Unix timestamp (number of seconds since epoch) to date/time (yyyy-MM-dd HH:mm:ss).
+		/// </summary>
+		/// <param name="unixTimeStamp"></param>
+		/// <returns></returns>
+		public static DateTime ConvertUnixTimeToDate(int unixTime)
+		{
+			// Unix timestamp is seconds past epoch
+			return Epoch.AddSeconds(unixTime).ToUniversalTime();
+		}
+
+		/// <summary>
+		/// Convert date/time (yyyy-MM-dd HH:mm:ss) to Unix timestamp (number of seconds since epoch).
+		/// </summary>
+		/// <param name="dateTime"></param>
+		/// <returns></returns>
+		public static int ConvertDateToUnixTime(DateTime dateTime)
+		{
+			return (int)(dateTime - Epoch).TotalSeconds;
+		}
+		#endregion
+	}
 }
