@@ -15,8 +15,18 @@ namespace Wrong_Caculations
 			Console.WriteLine(t - 273.15);
 			Console.WriteLine((float)((int)(t * 1000  - 273150))/1000);
 
+			Console.WriteLine($"Attempt 3: {KelvinToCelsius(t)}");
+
 			Console.Write("Press any key...");
 			Console.ReadKey();
+		}
+
+		static float KelvinToCelsius(float Kelvin)
+		{
+			int kelvin = (int)(Kelvin * 100);
+			kelvin -= 27315;
+
+			return (float)kelvin / 100;
 		}
 	}
 }
