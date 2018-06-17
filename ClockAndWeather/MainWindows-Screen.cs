@@ -32,6 +32,7 @@ namespace ClockAndWeather
 			WindBeaufortTextBlock.Text = DisplayBeafort(RefreshWeather.wind.speed);
 
 			WindSpeedTextBlock.Text = DisplayWindSpeed(RefreshWeather.wind.speed);
+			WindSpeedTextBlock.ToolTip = $"{RefreshWeather.wind.speed.ToString()} m/s";
 			WindDescriptionTextBlock.Text = Weather.ConvertWindBeaufortToName(RefreshWeather.wind.speed);
 			WindDescriptionTextBlock.ToolTip = Weather.ConvertWindBeaufortToDescription(RefreshWeather.wind.speed);
 

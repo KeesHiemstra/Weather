@@ -65,7 +65,8 @@
 									  VerticalAlignment="Center" >
 					<TextBlock Name="WindSpeedTextBlock"
 										 FontSize="14" 
-										 Margin="0,0,5,0" />
+										 Margin="0,0,5,0" 
+										 ToolTip="?"/>
 					<TextBlock Name="WindDescriptionTextBlock"
 										 FontSize="14" />
 				</StackPanel>
