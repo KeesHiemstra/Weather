@@ -18,70 +18,70 @@ using System.IO;
 
 namespace ClockAndWeather
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			InitializeComponent();
-			//Log.Write("Start application");
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            //Log.Write("Start application");
 
-			//Prepare automated tasks
-			AutoResetEvent autoEvent = new AutoResetEvent(false);
-			TimedAction timedAction = new TimedAction();
-			TimerCallback timerCallback = timedAction.Action;
-			Timer timer = new Timer(timerCallback, autoEvent, 5 * 60 * 1000, 15 * 60 * 1000);
+            //Prepare automated tasks
+            AutoResetEvent autoEvent = new AutoResetEvent(false);
+            TimedAction timedAction = new TimedAction();
+            TimerCallback timerCallback = timedAction.Action;
+            Timer timer = new Timer(timerCallback, autoEvent, 5 * 60 * 1000, 15 * 60 * 1000);
 
-			BuildScreenAsync();
-		}
+            BuildScreenAsync();
+        }
 
-		private void RefreshButton_Click(object sender, RoutedEventArgs e)
-		{
-			//Log.Write("RereshButton_Click()");
-			BuildScreenAsync();
-		}
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Log.Write("RereshButton_Click()");
+            BuildScreenAsync();
+        }
 
-		public static void AutomaticScreen()
-		{
-			//Log.Write("AutomacticScreen()");
-			AutomaticScreenAsync();
-		}
+        public static void AutomaticScreen()
+        {
+            //Log.Write("AutomacticScreen()");
+            AutomaticScreenAsync();
+        }
 
-		public static async Task AutomaticScreenAsync()
-		{
-			await Log.Write("AutomaticScreenAsync()");
-			await SayText("Refresh");
-			//await BuildScreenAsync();
-		}
+        public static async Task AutomaticScreenAsync()
+        {
+            await Log.Write("AutomaticScreenAsync()");
+            await SayText("Refresh");
+            //await BuildScreenAsync();
+        }
 
-		
-	}
 
-	class TimedAction
-	{
-		public void Action(Object StatusInfo)
-		{
-			MainWindow.AutomaticScreen();
-		}
-	}
+    }
 
-	class Log
-	{
-		public Log()
-		{
+    class TimedAction
+    {
+        public void Action(Object StatusInfo)
+        {
+            MainWindow.AutomaticScreen();
+        }
+    }
 
-		}
+    class Log
+    {
+        public Log()
+        {
 
-		public static async Task Write(string Message)
-		{
-			using (StreamWriter sw = File.AppendText(@"C:\Temp\ClockAndWeather.log"))
-			{
-				await sw.WriteLineAsync(string.Format("{0} {1}",
-					DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-					Message));
-			}
-		}
-	}
+        }
+
+        public static async Task Write(string Message)
+        {
+            using (StreamWriter sw = File.AppendText(@"C:\Temp\ClockAndWeather.log"))
+            {
+                await sw.WriteLineAsync(string.Format("{0} {1}",
+                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Message));
+            }
+        }
+    }
 }

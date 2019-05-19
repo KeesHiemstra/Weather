@@ -127,7 +127,7 @@ namespace ClockAndWeather
 		{
 			DateTime stationTime = Weather.ConvertUnixTimeToDate(StationTime);
 			return string.Format("Station time: {0} ({1} minutes ago)",
-				stationTime.ToString("yyyy-MM-dd HH-mm"),
+				stationTime.ToString("yyyy-MM-dd HH:mm"),
 				(DateTime.Now - stationTime).Minutes);
 		}
 	}
