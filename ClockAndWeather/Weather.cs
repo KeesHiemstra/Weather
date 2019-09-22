@@ -19,12 +19,12 @@ namespace ClockAndWeather
             HttpResponseMessage httpRespond = await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=51.913580&lon=4.999771&appid=8b6fbc4fab942058a2e1967b913460a4&lang=nl");
             string httpResult = await httpRespond.Content.ReadAsStringAsync();
 
-            using (StreamWriter sw = File.AppendText(@"C:\Temp\Weather.log"))
-            {
-                await sw.WriteLineAsync(String.Format("{0}\t{1}",
-                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    httpResult));
-            }
+            //using (StreamWriter sw = File.AppendText(@"C:\Temp\Weather.log"))
+            //{
+            //    await sw.WriteLineAsync(String.Format("{0}\t{1}",
+            //        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            //        httpResult));
+            //}
 
             //Translate data
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(WeatherData));
