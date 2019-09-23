@@ -23,19 +23,6 @@ namespace ClockAndWeather
 
 			WeatherData weatherData = JsonConvert.DeserializeObject<WeatherData>(httpResult);
 
-			//using (StreamWriter sw = File.AppendText(@"C:\Temp\Weather.log"))
-			//{
-			//	await sw.WriteLineAsync(String.Format("{0}\t{1}",
-			//			DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-			//			httpResult));
-			//}
-
-			//Translate data
-			//DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(WeatherData));
-			//MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(httpResult));
-
-			//WeatherData weatherData = (WeatherData)serializer.ReadObject(memoryStream);
-
 			return weatherData;
 		}
 
@@ -45,10 +32,10 @@ namespace ClockAndWeather
 	{
 		#region Temperature
 		/// <summary>
-		/// Calculate temperature Kalvin to Celcius in 1 decimal.
+		/// Calculate temperature Kalvin to Celsius in 1 decimal.
 		/// </summary>
 		/// <param name="Kelvin"></param>
-		/// <returns>Celcius</returns>
+		/// <returns>Celsius</returns>
 		public static double ToCelsius(double Kelvin)
 		{
 			return Math.Floor((Kelvin - 273.15) * 10) / 10;
@@ -168,13 +155,13 @@ namespace ClockAndWeather
 
 		#region Time
 		/// <summary>
-		/// Convert Unix timestamp (number of seconds since epoch to date/time.
+		/// Convert Unix time stamp (number of seconds since epoch to date/time.
 		/// </summary>
 		/// <param name="unixTimeStamp"></param>
 		/// <returns></returns>
 		public static DateTime ConvertUnixTimeToDate(int unixTime)
 		{
-			// Unix timestamp is seconds past epoch
+			// Unix time stamp is seconds past epoch
 			System.DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
 			return dateTime.AddSeconds(unixTime).ToLocalTime();
 		}
