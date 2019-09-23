@@ -13,7 +13,7 @@ namespace ClockAndWeather
 	{
 		private async Task BuildScreenAsync()
 		{
-			await Log.Write("BuidScreenAsync()");
+			//await Log.Write("BuidScreenAsync()");
 			DateTime RefreshTime = DateTime.Now;
 
 			//RootObject ThisWeather = await WeatherInfo.GetWeather();
