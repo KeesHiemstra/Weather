@@ -26,6 +26,8 @@ namespace ClockAndWeather
 			PressureTextBlock.Text = DisplayPressure(RefreshWeather.main.pressure);
 			HumidityTextBlock.Text = DisplayHumidity(RefreshWeather.main.humidity);
 
+			VisibilityTextBlock.Text = DisplayVisibility(RefreshWeather.visibility);
+
 			SunRiseTextBlock.Text = DisplaySunRise(RefreshWeather.sys.sunrise);
 			SunSetTextBlock.Text = DisplaySunSet(RefreshWeather.sys.sunset);
 
@@ -90,6 +92,11 @@ namespace ClockAndWeather
 		{
 			return string.Format("{0} %",
 				Humidity);
+		}
+
+		private static string DisplayVisibility(int Visibility)
+		{
+			return string.Format("{0} m", Visibility);
 		}
 
 		private static string DisplayWindSpeed(double WindSpeed)
