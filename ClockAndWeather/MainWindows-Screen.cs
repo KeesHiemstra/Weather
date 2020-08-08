@@ -27,7 +27,7 @@ namespace ClockAndWeather
 			HumidityTextBlock.Text = DisplayHumidity(RefreshWeather.main.humidity);
 
 			VisibilityTextBlock.Text = DisplayVisibility(RefreshWeather.visibility);
-      CloudTextBlock.Text = RefreshWeather.clouds.all.ToString();
+      CloudTextBlock.Text = DisplayClouds(RefreshWeather.clouds.all);
 
 			SunRiseTextBlock.Text = DisplaySunRise(RefreshWeather.sys.sunrise);
 			SunSetTextBlock.Text = DisplaySunSet(RefreshWeather.sys.sunset);
@@ -55,7 +55,7 @@ namespace ClockAndWeather
 
 		}
 
-		private static async Task SayText(string Saying)
+    private static async Task SayText(string Saying)
 		{
 			// Initialize a new instance of the SpeechSynthesizer.
 			SpeechSynthesizer synth = new SpeechSynthesizer();
@@ -98,6 +98,11 @@ namespace ClockAndWeather
 		private static string DisplayVisibility(int Visibility)
 		{
 			return string.Format("{0} m", Visibility);
+		}
+
+		private string DisplayClouds(int clouds)
+		{
+			return string.Format("{0} % clouds", clouds);
 		}
 
 		private static string DisplayWindSpeed(double WindSpeed)
