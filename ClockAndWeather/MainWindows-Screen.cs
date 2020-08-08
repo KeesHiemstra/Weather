@@ -27,6 +27,7 @@ namespace ClockAndWeather
 			HumidityTextBlock.Text = DisplayHumidity(RefreshWeather.main.humidity);
 
 			VisibilityTextBlock.Text = DisplayVisibility(RefreshWeather.visibility);
+      CloudTextBlock.Text = RefreshWeather.clouds.all.ToString();
 
 			SunRiseTextBlock.Text = DisplaySunRise(RefreshWeather.sys.sunrise);
 			SunSetTextBlock.Text = DisplaySunSet(RefreshWeather.sys.sunset);

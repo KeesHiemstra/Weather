@@ -18,7 +18,7 @@ namespace ClockAndWeather
 			//Get JSon string from the web
 			HttpClient http = new HttpClient();
 			HttpResponseMessage httpRespond = 
-				await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=51.913580&lon=4.999771&appid=8b6fbc4fab942058a2e1967b913460a4&lang=nl");
+				await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=51.913671&lon=4.999712&appid=8b6fbc4fab942058a2e1967b913460a4&lang=nl");
 			string httpResult = await httpRespond.Content.ReadAsStringAsync();
 
 			WeatherData weatherData = JsonConvert.DeserializeObject<WeatherData>(httpResult);
