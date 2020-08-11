@@ -52,7 +52,7 @@ namespace ConsoleApp1
 
 			Console.WriteLine("Temperature        : {0}", Weather.Main.Temperature);
 			Console.WriteLine("Maximum temperature: {0:F1}", Weather.Main.TemperatureMaximum);
-			Console.WriteLine("Minumum temperature: {0:F1}", Weather.Main.TemperatureMinimum);
+			Console.WriteLine("Minimum temperature: {0:F1}", Weather.Main.TemperatureMinimum);
 			Console.WriteLine("Humidity           : {0}", Weather.Main.Humidity);
 			Console.WriteLine("Pressure           : {0}", Weather.Main.Pressure);
 			Console.WriteLine("Wind speed         : {0}", Weather.Wind.Speed);
