@@ -206,7 +206,7 @@ namespace ClockAndWeather
   public class Coord
   {
     [DataMember]
-    public int lon { get; set; }
+    public double lon { get; set; }
 
     [DataMember]
     public double lat { get; set; }
